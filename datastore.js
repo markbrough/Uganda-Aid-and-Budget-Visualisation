@@ -133,22 +133,18 @@ var OpenSpending = OpenSpending || {};
     };
 
     my.entityLink = function(entity) {
-      var out = $('<div />').append(
-          $('<a />').text(entity.label).attr('href', my.entityUrl(entity)).attr("target","_blank")
-        ).html();
+      var out = $('<div />').text(entity.label_facet).html();
       return out
     };
 
     my.swgShow = function(entity) {
-      var out = $('<div />').append(
-          $('<a />').text(entity.label).attr('href', (my._config.endpoint + 'ugandabudget/sector/' + entity.name + '?_time=' + parent.year)).attr("target","_blank")
-        ).html();
+      var out = $('<div />').text(entity.label_facet).html();
       return out
     };
     
     my.projectShow = function(projectname) {
-        if (projectname != '') {
-            var out = projectname;
+        if (projectname.label_facet != '') {
+            var out = projectname.label_facet;
             out = out + '<br /><span class="progproj">Project</span>';
         } else {
             var out = "";
@@ -157,8 +153,8 @@ var OpenSpending = OpenSpending || {};
     }
     
     my.programmeShow = function(entity) {
-        if (entity.label != '(Undefined)') {
-            var out = entity.label;
+        if (entity.label_facet != '(Undefined)') {
+            var out = entity.label_facet;
             out = out + '<br /><span class="progproj">Programme</span>';
         } else {
             var out = "";
@@ -167,9 +163,7 @@ var OpenSpending = OpenSpending || {};
     }
 
    my.sectorobjectiveShow = function(entity) {
-      var out = $('<div />').append(
-          $('<a />').text(entity.label).attr('href', (my._config.endpoint + 'ugandabudget/subsector/' + entity.name + '?_time=' + parent.year)).attr("target","_blank")
-        ).html();
+      var out = $('<div />').text(entity.label_facet).html();
       return out
     };
 
@@ -233,8 +227,8 @@ var OpenSpending = OpenSpending || {};
             if (key.indexOf('aid_programme_name.') === 0) {
               entry.aid_programme[key.slice(19)] = item[key];
             }
-            if (key.indexOf('project.') === 0) {
-              entry.project[key.slice(8)] = item[key];
+            if (key.indexOf('project_name.') === 0) {
+              entry.project[key.slice(13)] = item[key];
             }
           }
           return entry;
@@ -274,10 +268,10 @@ var OpenSpending = OpenSpending || {};
         <table> \
           <thead> \
             <tr> \
-              <th column="from.label" class="sortable">Spender</th> \
-              <th column="sector.label" class="sortable">Sector</th> \
-              <th column="subsector.label" class="sortable">Subsector</th> \
-              <th column="project_programme.label">Title</th> \
+              <th column="from.label_facet" class="sortable">Spender</th> \
+              <th column="sector.label_facet" class="sortable">Sector</th> \
+              <th column="subsector.label_facet" class="sortable">Subsector</th> \
+              <th column="project_programme.label_facet">Title</th> \
               <th column="amount" class="num sortable">Amount</th> \
               <th>&nbsp;</th> \
             </tr> \
@@ -295,7 +289,7 @@ var OpenSpending = OpenSpending || {};
                 {{html my.sectorobjectiveShow(entry.subsector)}} \
               </td> \
               <td> \
-                {{html my.programmeShow(entry.programme)}} {{html my.projectShow(entry.project_name)}}  \
+                {{html my.programmeShow(entry.programme)}} {{html my.projectShow(entry.project)}}  \
               </td> \
               <td class="num"> \
                 USD ${OpenSpending.Utils.formatAmountWithCommas(entry.amount, 2)} \
