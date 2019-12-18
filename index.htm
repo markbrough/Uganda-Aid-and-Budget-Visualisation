@@ -36,12 +36,8 @@ var sector_objective;
 var isasectorobjective;
 var rootvar;
 var overview_selected;
-
+bubbleTree = false;
 $(function() {
-	bubbleTree = new BubbleTree({
-		data: [],
-		container: '.bubbletree'
-	});
 
 	BubbleTree.Utils.formatNumber = function(n) {
 		var prefix = '';
@@ -62,10 +58,16 @@ $(function() {
 	});
 
 
-	function changeYear(whichyear) {
-		year = whichyear;
-		bubbleTree.clean();
-		$('.bubbletree').empty();
+	function changeYear() {
+		if (bubbleTree) {
+			bubbleTree.clean();
+			$('.bubbletree').empty();
+		} else {
+			bubbleTree = new BubbleTree({
+				data: [],
+				container: '.bubbletree'
+			});
+		}
 
 		new OpenSpending.Aggregator({
 			apiUrl: 'http://openspending.org/api',
@@ -107,7 +109,7 @@ $(function() {
 		var changetowhichyear = this.value;
 		year = changetowhichyear;
 		$('.bubbletree').fadeTo('slow', 0.5, function() {
-			changeYear(changetowhichyear);
+			changeYear();
 		   });
 		$('#radio label').removeClass('ui-state-active');
 		$('#radio .'+changetowhichyear+'_chooser').addClass('ui-state-active');
@@ -138,7 +140,7 @@ $(function() {
 			year = hash.substr(3,4);
 			$('#radio .'+year+'_chooser').addClass('ui-state-active');
 		} else {
-			year = '2005';
+			year == '2005';
 			$('#radio .'+year+'_chooser').addClass('ui-state-active');
 		}
 		if (year == 'aid-') {
@@ -149,8 +151,8 @@ $(function() {
 		$('#radio .'+year+'_chooser .ui-state-active').attr("checked", "checked");
 	};
 
-	$.history.init(setYear);
-	changeYear(year)
+	$.history.init(setYear, { unescape: ",/^" });
+	changeYear()
 
 });
 
