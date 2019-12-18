@@ -13,17 +13,17 @@
 
 <link rel="stylesheet" type="text/css" media="all" href="jquery-ui-1.8.16.custom.css" />
 
-<link rel="stylesheet" type="text/css" media="all" href="ugandabubbletree.css" /> 
+<link rel="stylesheet" type="text/css" media="all" href="ugandabubbletree.css" />
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
-<style type="text/css" media="all">@import "thickbox.css";</style>	
+<style type="text/css" media="all">@import "thickbox.css";</style>
 <style>
 html, body {
-	overflow: hidden; 
+	overflow: hidden;
 }
 #header {
 	top:50%;
 }
-.bubbletree-wrapper { 
+.bubbletree-wrapper {
 	height: 70%;
 	position: relative;
 }
@@ -47,7 +47,7 @@ var year = '2005';
 var swg;
 var sector_objective;
 var isasectorobjective;
-var rootvar;		       
+var rootvar;
 var overview_selected;
 
 	    $(function() {
@@ -64,18 +64,18 @@ var overview_selected;
 			var $tooltip = $('<div class="tooltip">Tooltip</div>');
 			$('.bubble-chart').append($tooltip);
 			$tooltip.hide();
-			
-			
-			
+
+
+
 			var getTooltip = function() {
 				return this.getAttribute('tooltip');
 			};
-			
+
 			var initTooltip = function(node, domnode) {
 				domnode.setAttribute('tooltip', node.label+' &nbsp;<b>'+node.famount+'</b><br /><small>'+node.name+'</small>');
-				
+
 				vis4.log(domnode.getAttribute('tooltip'));
-				
+
 				$(domnode).tooltip({ delay: 200, bodyHandler: getTooltip });
 			};
 
@@ -97,7 +97,7 @@ var overview_selected;
 						bubbleType: 'donut',
 						initTooltip: initTooltip,
 						maxNodesPerLevel: 12,
-						bubbleStyles: {									
+						bubbleStyles: {
 							'id': {
 								'root': { color: '#ffffff' }
 							},
@@ -113,7 +113,7 @@ var overview_selected;
 			});
 		}
 
-		$(function() {		
+		$(function() {
 
 
 		$("#radio input[type='radio']").click(function() {
@@ -127,22 +127,22 @@ var overview_selected;
 			// change the hash...
 		});
 
-			
+
 			var $tooltip = $('<div class="tooltip">Tooltip</div>');
 			$('.bubble-chart').append($tooltip);
 			$tooltip.hide();
-			
-			
-			
+
+
+
 			var getTooltip = function() {
 				return this.getAttribute('tooltip');
 			};
-			
+
 			var initTooltip = function(node, domnode) {
 				domnode.setAttribute('tooltip', node.label+' &nbsp;<b>'+node.famount+'</b><br /><small>'+node.name+'</small>');
-				
+
 				vis4.log(domnode.getAttribute('tooltip'));
-				
+
 				$(domnode).tooltip({ delay: 200, bodyHandler: getTooltip });
 			};
 			function setYear(hash) {
@@ -184,7 +184,7 @@ var overview_selected;
 				rootNodeLabel: 'Aid and Domestic Spending in Uganda<br />(USD)',
 				breakdown: 'spending_source_type',
 				callback: function(data) {
-				
+
 					bubbleTree = new BubbleTree({
 						data: data,
 						container: '.bubbletree',
@@ -192,7 +192,7 @@ var overview_selected;
 						bubbleType: 'donut',
 						initTooltip: initTooltip,
 						maxNodesPerLevel: 12,
-						bubbleStyles: {									
+						bubbleStyles: {
 							'id': {
 								'root': { color: '#ffffff' }
 							},
@@ -205,11 +205,11 @@ var overview_selected;
 					});
 				}
 			});
-			
+
 		});
 
-       
-                                        
+
+
 	</script>
 </head>
 <body>
@@ -219,7 +219,7 @@ var overview_selected;
 <input alt="#TB_inline?height=400&amp;width=600&amp;inlineId=overview-div" title="Overview" class="thickbox ui-button-text ui-button ui-widget ui-state-default ui-button-text-only ui-state-active" value="Overview" type="button">
 </div>
 	<div id="overview-div">
-			
+
 	<h2>Uganda Aid and Budget Visualisation</h2>
 	<p>This visualisation shows Uganda's domestic budget alongside the aid spending by donors in Uganda, for 2003-2006. You can click on an individual sector and see the amount spent in total - by the size of the bubble - and by the Government and Aid donors. Aid is split into two components:</p>
 	<ul>
