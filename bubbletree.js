@@ -694,7 +694,7 @@ var BubbleTree = function(config, onHover, onUnHover) {
 	*/
 	
 	me.initHistory = function() {
-		$.history.init(me.urlChanged.bind(me), { unescape: ",/" });
+		$.history.init(me.urlChanged.bind(me), { unescape: ",/^" });
 	};
 	
 	me.freshUrl = '';
